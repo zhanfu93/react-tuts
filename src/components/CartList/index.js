@@ -96,4 +96,4 @@ const mapDispatchToProps = dispatch => {
  */
 // export default connect(mapStateToProps,{decrement, increment})(CartList)
 //直接第二个参数传递一个对象，这里面的对象就是actionCreators，只要传入了actionCrators，在组件内就通过this.props.actionCreator来调用，调用之后，那个actionCreator就会自动帮你把它内部的action dispatch出去
-export default connect(state=>{return {cartList: state.cart}},{decrement, increment, decrementAsync})(CartList)
+export default connect(state=>({cartList: state.cart}),{decrement, increment, decrementAsync})(CartList)
