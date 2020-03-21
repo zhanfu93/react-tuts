@@ -1,20 +1,38 @@
 import React, { Component } from 'react'
 
-import { Button, Pagination } from 'antd'
+import { CounterBtn, CounterDisplay } from './components'
 
-export default class App extends Component {
+import { observer, inject } from 'mobx-react'
+
+
+/**
+ * https://www.npmjs.com/package/mobx-react
+ */
+// @inject('counter')
+@inject((store) => {
+    return {
+        count: store.counter.count,
+        doubleCount: store.counter.doubleCount, 
+        increment: store.counter.increment, 
+        decrement: store.counter.decrement 
+    }
+})
+@observer
+
+class App extends Component {
+
+    
+
     render() {
+        const { count, doubleCount, increment, decrement } = this.props
         return (
             <div>
-                <Button loading type="primary">测试</Button>
-                <Pagination
-                    showSizeChanger
-                    
-                    defaultCurrent={3}
-                    total={500}
-                />
+                <CounterBtn onClick={decrement}>-</CounterBtn>
+                <CounterDisplay count={count} doubleCount={doubleCount}/>
+                <CounterBtn onClick={increment}>+</CounterBtn>
             </div>
         )
     }
 }
 
+export default App
